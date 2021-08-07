@@ -1,4 +1,3 @@
-# Dazzle do not supports ARG TRIGGER_REBUILD=2
 FROM gitpod/workspace-base:latest
 
 ### Node.js ###
@@ -29,7 +28,7 @@ RUN curl -fsSL https://rvm.io/mpapis.asc | gpg --import - \
         && rvm install 2.6.3 \
         && rvm use 2.6.3 --default \
         && rvm rubygems current \
-        && gem install bundler -v 2.0.1 --no-document \
+        && gem install bundler --no-document \
         && gem install solargraph --no-document" \
     && echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*' >> /home/gitpod/.bashrc.d/70-ruby
 RUN echo "rvm_gems_path=/workspace/.rvm" > ~/.rvmrc
@@ -52,6 +51,7 @@ ENV PATH="$PATH:$HOME/.pg_ctl/bin"
 ENV DATABASE_URL="postgresql://gitpod@localhost"
 ENV PGHOSTADDR="127.0.0.1"
 ENV PGDATABASE="postgres"
+ENV DB_USER_NAME=gitpod
 
 # This is a bit of a hack. At the moment we have no means of starting background
 # tasks from a Dockerfile. This workaround checks, on each bashrc eval, if the
