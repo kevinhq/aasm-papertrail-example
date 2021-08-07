@@ -1,0 +1,11 @@
+image:
+  file: Dockerfile
+tasks:
+  - name: Rails
+    init: >
+      bundle install &&
+      npm install -g yarn &&
+      yarn install --check-files &&
+      rails db:drop && rails db:create && rails db:migrate &&
+      gp sync-done bundle
+    command: rails s
