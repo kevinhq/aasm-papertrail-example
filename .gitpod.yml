@@ -3,6 +3,7 @@ image:
 tasks:
   - name: Rails
     init: >
+      gem install bundler:2.0.1 &&
       bundle install &&
       npm install -g yarn &&
       yarn install --check-files &&
